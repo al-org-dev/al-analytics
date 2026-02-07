@@ -79,7 +79,7 @@ module AlAnalytics
 
     def analytics_value(site, key, legacy_key)
       value = site.config[key]
-      return value unless blank?(value)
+      return value unless value_blank?(value)
 
       legacy_config = site.config["analytics"]
       return nil unless legacy_config.is_a?(Hash)
@@ -88,7 +88,7 @@ module AlAnalytics
     end
 
     def enabled?(site, flag_key, value)
-      return false if blank?(value)
+      return false if value_blank?(value)
 
       flag = site.config[flag_key]
       return true if flag.nil?
@@ -96,7 +96,7 @@ module AlAnalytics
       !!flag
     end
 
-    def blank?(value)
+    def value_blank?(value)
       value.nil? || value.to_s.strip.empty?
     end
   end
