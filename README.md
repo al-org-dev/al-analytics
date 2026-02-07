@@ -35,13 +35,22 @@ plugins:
 2. Configure your analytics services in `_config.yml`:
 
 ```yaml
-# Analytics Configuration
-analytics:
-  google: "G-XXXXXXXXXX"  # your Google Analytics measurement ID
-  cronitor: "XXXXXXXXX"  # your Cronitor RUM analytics site ID
-  pirsch: "XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX"  # your Pirsch analytics site ID
-  openpanel: "XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX"  # your Openpanel analytics client ID
+enable_cookie_consent: false
+
+enable_google_analytics: true
+google_analytics: "G-XXXXXXXXXX"
+
+enable_cronitor_analytics: false
+cronitor_analytics: "XXXXXXXXX"
+
+enable_pirsch_analytics: false
+pirsch_analytics: "XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX"
+
+enable_openpanel_analytics: false
+openpanel_analytics: "XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX"
 ```
+
+The plugin also supports the legacy `analytics:` hash used by earlier releases.
 
 3. Add the analytics tag to your layout file (e.g., `_layouts/default.html`):
 
