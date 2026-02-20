@@ -1,8 +1,8 @@
-# Al-Analytics
+# al-analytics
 
-A Jekyll plugin that provides integrations with various analytics services for al-folio sites.
+`al_analytics` provides analytics integrations for `al-folio` v1.x and compatible Jekyll sites.
 
-## Supported Analytics Services
+## Supported providers
 
 - Google Analytics
 - Cronitor Analytics
@@ -11,28 +11,18 @@ A Jekyll plugin that provides integrations with various analytics services for a
 
 ## Installation
 
-Add this line to your Jekyll site's Gemfile:
-
 ```ruby
 gem 'al_analytics'
 ```
-
-And then execute:
-
-```bash
-$ bundle install
-```
-
-## Usage
-
-1. Add the plugin to your site's `_config.yml`:
 
 ```yaml
 plugins:
   - al_analytics
 ```
 
-2. Configure your analytics services in `_config.yml`:
+## Usage
+
+Configure analytics in `_config.yml`:
 
 ```yaml
 enable_cookie_consent: false
@@ -50,18 +40,19 @@ enable_openpanel_analytics: false
 openpanel_analytics: "XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX"
 ```
 
-The plugin also supports the legacy `analytics:` hash used by earlier releases.
-
-3. Add the analytics tag to your layout file (e.g., `_layouts/default.html`):
+Render scripts in your layout:
 
 ```liquid
 {% al_analytics_scripts %}
 ```
 
-## Development
+Legacy `analytics:` hash configuration is still supported.
 
-After checking out the repo, run `bundle install` to install dependencies.
+## Ecosystem context
+
+- Starter wiring happens in `al-folio` (`Gemfile` + `_config.yml`).
+- Consent/runtime coordination can be combined with `al_cookie`.
 
 ## Contributing
 
-Bug reports and pull requests are welcome on GitHub.
+Provider/runtime changes belong here. Starter-only docs/demo updates belong in `al-folio`.
