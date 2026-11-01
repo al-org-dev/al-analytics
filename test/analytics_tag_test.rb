@@ -92,6 +92,64 @@ class AlAnalyticsTagTest < Minitest::Test
     refute_includes output, 'cloudflareinsights.com'
   end
 
+  def test_renders_umami_from_umami_cloud_by_default
+    output = render_scripts(
+      'umami_analytics' => '11111111-2222-3333-4444-555555555555',
+      'enable_umami_analytics' => true
+    )
+
+    assert_includes output, 'src="https://cloud.umami.is/script.js"'
+    assert_includes output, 'data-website-id="11111111-2222-3333-4444-555555555555"'
+    refute_includes output, 'type="text/plain"'
+  end
+
+  def test_renders_umami_from_self_hosted_script_url
+    output = render_scripts(
+      'umami_analytics' => '11111111-2222-3333-4444-555555555555',
+      'umami_analytics_script_url' => 'https://stats.example.com/script.js'
+    )
+
+    assert_includes output, 'src="https://stats.example.com/script.js"'
+    refute_includes output, 'cloud.umami.is'
+  end
+
+  def test_renders_umami_with_cookie_consent_attributes
+    output = render_scripts(
+      'enable_cookie_consent' => true,
+      'umami_analytics' => '11111111-2222-3333-4444-555555555555'
+    )
+
+    assert_includes output, 'cloud.umami.is/script.js'
+    assert_includes output, 'type="text/plain" data-category="analytics"'
+  end
+
+  def test_renders_umami_from_legacy_analytics_hash
+    output = render_scripts(
+      'analytics' => {
+        'umami' => 'umami-legacy-id',
+        'umami_script_url' => 'https://stats.example.com/script.js'
+      }
+    )
+
+    assert_includes output, 'src="https://stats.example.com/script.js"'
+    assert_includes output, 'data-website-id="umami-legacy-id"'
+  end
+
+  def test_skips_umami_without_a_website_id
+    assert_equal '', render_scripts('enable_umami_analytics' => true)
+    assert_equal '', render_scripts('enable_umami_analytics' => true, 'umami_analytics' => '   ')
+    assert_equal '', render_scripts('umami_analytics_script_url' => 'https://stats.example.com/script.js')
+  end
+
+  def test_respects_explicit_umami_disable_flag
+    output = render_scripts(
+      'umami_analytics' => '11111111-2222-3333-4444-555555555555',
+      'enable_umami_analytics' => false
+    )
+
+    refute_includes output, 'umami'
+  end
+
   def test_renders_simple_analytics_when_enabled
     output = render_scripts(
       'enable_simple_analytics' => true

@@ -4,7 +4,7 @@ Gem::Specification.new do |spec|
   spec.authors       = ["al-org"]
   spec.email         = ["dev@al-org.dev"]
   spec.summary       = "Analytics integration tags for al-folio Jekyll sites"
-  spec.description   = "Jekyll plugin extracted from al-folio that renders Google Analytics, Cronitor RUM, Pirsch, OpenPanel, Cloudflare Web Analytics, and Simple Analytics scripts with optional cookie-consent attributes."
+  spec.description   = "Jekyll plugin extracted from al-folio that renders Google Analytics, Cronitor RUM, Pirsch, OpenPanel, Cloudflare Web Analytics, Umami, and Simple Analytics scripts with optional cookie-consent attributes."
   spec.homepage      = "https://github.com/al-org-dev/al-analytics"
   spec.license       = "MIT"
   spec.required_ruby_version = ">= 2.7"
