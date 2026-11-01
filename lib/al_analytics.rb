@@ -76,6 +76,19 @@ module AlAnalytics
         HTML
       end
 
+      umami_id = analytics_value(site, "umami_analytics", "umami")
+      if enabled?(site, "enable_umami_analytics", umami_id)
+        # Self-hosted Umami serves the tracker from its own domain and the
+        # tracker reports to wherever it was loaded from, so the script URL is
+        # the only thing a self-hosted setup needs to change.
+        umami_script = analytics_value(site, "umami_analytics_script_url", "umami_script_url")
+        umami_script = "https://cloud.umami.is/script.js" if value_blank?(umami_script)
+        output << <<~HTML
+          <!-- Umami Analytics -->
+          <script#{cookie_attrs} defer src="#{umami_script}" data-website-id="#{umami_id}"></script>
+        HTML
+      end
+
       if flag_enabled?(site, "enable_simple_analytics")
         output << <<~HTML
           <script#{cookie_attrs} async src="https://scripts.simpleanalyticscdn.com/latest.js"></script>

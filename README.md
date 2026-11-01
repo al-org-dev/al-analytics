@@ -9,6 +9,7 @@
 - Pirsch Analytics
 - OpenPanel Analytics
 - Cloudflare Web Analytics
+- Umami
 - Simple Analytics
 
 ## Installation
@@ -45,6 +46,12 @@ openpanel_analytics: "XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX"
 # `data-cf-beacon` snippet; without it nothing is rendered.
 enable_cloudflare_analytics: false
 cloudflare_analytics: "XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX"
+
+# Umami. The website ID is the `data-website-id` value in Umami's tracking code.
+# The script loads from Umami Cloud unless you set a self-hosted script URL.
+enable_umami_analytics: false
+umami_analytics: "XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX"
+umami_analytics_script_url: "https://cloud.umami.is/script.js"
 
 # Simple Analytics identifies your site by domain, so there is no key to set.
 enable_simple_analytics: false
